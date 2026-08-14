@@ -48,9 +48,9 @@ impl State {
         // variants using the methods defined above.
         match message {
             Message::Resize{ width , height } => self.resize(width, height),
-            Message::Move({x, y}) => self.move_position(Point{x,y}) ,
-            Message::Echo{s} => self.echo(s),
-            Message::ChangeColor{r, g, b} => self.change_color(r, g, b),
+            Message::Move(point) => self.move_position(point),
+            Message::Echo(s) => self.echo(s),
+            Message::ChangeColor(r, g, b) => self.change_color(r, g, b),
             Message::Quit => self.quit()
         }
     }
