@@ -46,6 +46,13 @@ impl State {
     fn process(&mut self, message: Message) {
         // TODO: Create a match expression to process the different message
         // variants using the methods defined above.
+        match message {
+            Message::Resize{ width , height } => self.resize(width, height),
+            Message::Move({x, y}) => self.move_position(Point{x,y}) ,
+            Message::Echo{s} => self.echo(s),
+            Message::ChangeColor{r, g, b} => self.change_color(r, g, b),
+            Message::Quit => self.quit()
+        }
     }
 }
 
@@ -76,6 +83,8 @@ mod tests {
         state.process(Message::Echo(String::from("Hello world!")));
         state.process(Message::ChangeColor(255, 0, 255));
         state.process(Message::Quit);
+
+        println!("FUSCA PRETO: {:?}", state.width);
 
         assert_eq!(state.width, 10);
         assert_eq!(state.height, 30);
